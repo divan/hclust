@@ -47,7 +47,7 @@ Anyway, it was fun coupld of hours spent.
 
 ## Documentation
 
-See [GoDoc](https://godoc.org/github.com/divan/num2words)
+See [GoDoc](https://godoc.org/github.com/divan/hclust)
 
 ## Licence
 
