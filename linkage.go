@@ -6,7 +6,7 @@ import "math"
 type LinkageFn func([]float64) float64
 
 // SingleLinkage implements nearest neighbour method.
-var SingleLinkage = func(a []float64) float64 {
+func SingleLinkage(a []float64) float64 {
 	var min = math.MaxFloat64
 	for i := 0; i < len(a); i++ {
 		if a[i] < min {
@@ -17,7 +17,7 @@ var SingleLinkage = func(a []float64) float64 {
 }
 
 // CompleteLinkage implements farthest neighbour method.
-var CompleteLinkage = func(a []float64) float64 {
+func CompleteLinkage(a []float64) float64 {
 	var max = -math.MaxFloat64
 	for i := 0; i < len(a); i++ {
 		if a[i] > max {
@@ -28,6 +28,6 @@ var CompleteLinkage = func(a []float64) float64 {
 }
 
 // AverageLinkage implements simple average linkage method.
-var AverageLinkage = func(a []float64) float64 {
+func AverageLinkage(a []float64) float64 {
 	return mean(a)
 }

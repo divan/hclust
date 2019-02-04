@@ -11,7 +11,7 @@ type DistanceFn func(a, b []float64) float64
 // in an Euclidian space. a and b should be of the same length.
 //
 // See https://en.wikipedia.org/wiki/Euclidean_distance
-var Euclidian DistanceFn = func(a, b []float64) float64 {
+func Euclidian(a, b []float64) float64 {
 	var sum float64
 	for i := 0; i < len(a); i++ {
 		sum += math.Pow(a[i]-b[i], 2)
@@ -22,7 +22,7 @@ var Euclidian DistanceFn = func(a, b []float64) float64 {
 
 // Maximum implements Maximum distance formula.
 // a and b should be of the same length.
-var Maximum DistanceFn = func(a, b []float64) float64 {
+func Maximum(a, b []float64) float64 {
 	var max float64
 	for i := 0; i < len(a); i++ {
 		dist := math.Abs(a[i] - b[i])
@@ -38,7 +38,7 @@ var Maximum DistanceFn = func(a, b []float64) float64 {
 // a and b should be of the same length.
 //
 // See https://en.wikipedia.org/wiki/Canberra_distance
-var Canberra DistanceFn = func(a, b []float64) float64 {
+func Canberra(a, b []float64) float64 {
 	var sum float64
 	for i := 0; i < len(a); i++ {
 		sum += math.Abs(a[i]-b[i]) / (math.Abs(a[i]) + math.Abs(b[i]))
@@ -51,7 +51,7 @@ var Canberra DistanceFn = func(a, b []float64) float64 {
 // a and b should be of the same length.
 //
 // See https://en.wikipedia.org/wiki/Taxicab_geometry
-var Manhattan DistanceFn = func(a, b []float64) float64 {
+func Manhattan(a, b []float64) float64 {
 	var sum float64
 	for i := 0; i < len(a); i++ {
 		sum += math.Abs(a[i] - b[i])
@@ -62,7 +62,7 @@ var Manhattan DistanceFn = func(a, b []float64) float64 {
 
 // Percent implements percent distance formula.
 // a and b should be of the same length.
-var Percent DistanceFn = func(a, b []float64) float64 {
+func Percent(a, b []float64) float64 {
 	var sum float64
 	for i := 0; i < len(a); i++ {
 		sum += math.Abs(a[i] - b[i])
@@ -75,7 +75,7 @@ var Percent DistanceFn = func(a, b []float64) float64 {
 // a and b should be of the same length.
 //
 // See https://en.wikipedia.org/wiki/Cosine_similarity
-var CosineSimilarity DistanceFn = func(a, b []float64) float64 {
+func CosineSimilarity(a, b []float64) float64 {
 	num := dotProduct(a, b)
 	denom := math.Sqrt(dotProduct(a, a) * dotProduct(b, b))
 	if denom == 0 {
@@ -86,7 +86,7 @@ var CosineSimilarity DistanceFn = func(a, b []float64) float64 {
 
 // Angular implements angular distance formula.
 // a and b should be of the same length.
-var Angular DistanceFn = func(a, b []float64) float64 {
+func Angular(a, b []float64) float64 {
 	cs := CosineSimilarity(a, b)
 	return 2 * math.Acos(cs) / math.Pi
 }
@@ -95,7 +95,7 @@ var Angular DistanceFn = func(a, b []float64) float64 {
 // a and b should be of the same length.
 //
 // See https://en.wikipedia.org/wiki/Pearson_correlation_coefficient#Pearson%27s_distance
-var Pearson DistanceFn = func(a, b []float64) float64 {
+func Pearson(a, b []float64) float64 {
 	num := dotProduct(residuals(a), residuals(b))
 	denom := sd(a) * sd(b) * float64(len(a))
 	if denom == 0 {
@@ -107,7 +107,7 @@ var Pearson DistanceFn = func(a, b []float64) float64 {
 
 // Spearman implements Spearman's distance formula.
 // a and b should be of the same length.
-var Spearman DistanceFn = func(a, b []float64) float64 {
+func Spearman(a, b []float64) float64 {
 	ra := ranks(a)
 	rb := ranks(b)
 	dist := Euclidian(ra, rb)
